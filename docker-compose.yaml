@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: elasticsearch:8.9.1
+    platform: linux/amd64
+    volumes:
+      - ./docker/images/mysql/mysql.cnf:/etc/mysql/conf.d/app.cnf:ro
+   
+  curator-opensearch:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    # environment:
+    #   - TEST_ES_SERVER=elasticsearch:9200

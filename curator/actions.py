@@ -674,6 +674,11 @@ class DeleteIndices(object):
                 len(self.index_list.indices), self.index_list.indices
             )
         )
+        #TODO: retry_* should be added to the class 
+        if not utils.safe_to_snap(self.client, retry_interval=120, retry_count=3):
+            raise exceptions.FailedExecution(
+                'Unable to delete snapshot(s) because a snapshot is in '
+                'state "IN_PROGRESS"')
         try:
             index_lists = utils.chunk_index_list(self.index_list.indices)
             for lst in index_lists:

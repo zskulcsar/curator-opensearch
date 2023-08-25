@@ -35,7 +35,10 @@ def action_specific(action):
             option_defaults.ignore_existing(),
             option_defaults.extra_settings(),
         ],
-        'delete_indices' : [],
+        'delete_indices' : [
+            option_defaults.retry_interval(),
+            option_defaults.retry_count(),
+        ],
         'delete_snapshots' : [
             option_defaults.repository(),
             option_defaults.retry_interval(),
